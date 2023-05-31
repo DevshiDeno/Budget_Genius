@@ -1,12 +1,10 @@
 import 'package:intl/intl.dart';
 import 'package:budget_genius/Dashboard/Personal/seeAllTransactions.dart';
 import 'package:budget_genius/Dashboard/Personal/transactions.dart';
-import 'package:budget_genius/Utils/Utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Personal extends StatelessWidget {
-  Personal({
+  const Personal({
     Key? key,
     required List<Transaction> transactions,
   }) : super(key: key);
@@ -30,7 +28,7 @@ class Personal extends StatelessWidget {
                       elevation: 8,
                       child: Container(
                         color: Colors.white24,
-                        height: 145,
+                        height: 170,
                         width: constraints.maxWidth,
                         child: Column(
                           children: const [
@@ -64,9 +62,9 @@ class Personal extends StatelessWidget {
                     );
                   },
                 ),
-                PreferredSize(
+                const PreferredSize(
                   preferredSize: Size.fromHeight(48),
-                  child: const TabBar(
+                  child: TabBar(
                     labelColor: Colors.green,
                     tabs: [
                       Tab(
@@ -100,12 +98,12 @@ class Personal extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
+          SizedBox(
             height: 350,
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text("M-pesa"),
                 ),
                 Expanded(
@@ -126,7 +124,7 @@ class Personal extends StatelessWidget {
                                   )));
                         },
                         child: Card(
-                          child: Container(
+                          child: SizedBox(
                             width: MediaQuery.of(context).size.width,
                             height: 60,
                             child: ListTile(
@@ -153,10 +151,10 @@ class Personal extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => TransactionListMPESA()),
+                            builder: (context) => const TransactionListMPESA()),
                       );
                     },
-                    child: Text('See all'),
+                    child: const Text('See all'),
                   ),
                 ),
               ],
@@ -166,8 +164,8 @@ class Personal extends StatelessWidget {
             height: 350,
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text("Equity"),
                 ),
                 Expanded(
@@ -210,12 +208,12 @@ class Personal extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextButton(
-                    child: Text("See all"),
+                    child: const Text("See all"),
                     onPressed: () {
                       Navigator.push(
-                          context as BuildContext,
+                          context,
                           MaterialPageRoute(
-                              builder: (context) => TransactionListMPESA()));
+                              builder: (context) => const TransactionListMPESA()));
                     },
                   ),
                 ),

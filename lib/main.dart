@@ -1,7 +1,5 @@
-import 'package:budget_genius/Dashboard/Personal/transactions.dart';
 import 'package:flutter/material.dart';
 
-import 'Dashboard/Personal/seeAllTransactions.dart';
 import 'Dashboard/dashboard.dart';
 import 'Dashboard/Personal/personal.dart';
 
@@ -29,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: TransactionList(transactions: transactions,)
+      home: Dashboard()
     );
   }
 }

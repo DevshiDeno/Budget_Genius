@@ -111,16 +111,15 @@ class TransactionDetails extends StatelessWidget {
   TransactionDetails({Key? key, required this.transaction}) : super(key: key);
   final Transaction transaction;
   final List<IconData> myIcons = [
-    Icons.accessibility,
-    Icons.account_balance,
-    Icons.account_box,
+    Icons.home,
+    Icons.card_giftcard,
+    Icons.face,
     Icons.account_circle,
     Icons.ac_unit,
     Icons.adb,
     Icons.add_alarm,
     Icons.add_alert,
     Icons.add_box,
-    Icons.add_circle_outline,
   ];
 
   @override
@@ -130,66 +129,88 @@ class TransactionDetails extends StatelessWidget {
         backgroundColor: Colors.greenAccent,
         title: Text("${transaction.title}"),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 100,
-              child: ListTile(
-                title: Text("-${transaction.amount}"),
-                subtitle: Text("${transaction.date}"),
-              ),
-            ),
-          ),
-          Card(
-            child: Container(
-              color: Colors.transparent,
-              child: ListTile(
-                leading: Text("Account"),
-                trailing: Text("1233 1322 2222 2223"),
-              ),
-            ),
-          ),
-          Card(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: 200,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Category"),
-                    Center(
-                      child: CircleAvatar(
-                        child: Icon(Icons.emoji_food_beverage),
-                      ),
-                    ),
-                    const Divider(),
-                    Expanded(
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                        ),
-                        itemCount: myIcons.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Icon(myIcons[index]),
-                          );
-                        },
-                      ),
-                    )
-                  ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 100,
+                child: ListTile(
+                  title: Text("-${transaction.amount}"),
+                  subtitle: Text("${transaction.date}"),
                 ),
               ),
             ),
-          )
-        ],
+            Card(
+              child: Container(
+                child: const ListTile(
+                  leading: Text("Account"),
+                  trailing: Text("1233 **** **** 2223"),
+                ),
+              ),
+            ),
+            Card(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 440,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Category"),
+                      const Center(
+                        child: CircleAvatar(
+                          child: Icon(Icons.emoji_food_beverage),
+                        ),
+                      ),
+                      const Divider(),
+                      Expanded(
+                        child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 4,
+                            mainAxisSpacing: 4,
+                          ),
+                          itemCount: myIcons.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return SizedBox(
+                              width: 4,
+                              height: 4,
+                              child: Icon(myIcons[index]),
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.delete_sharp),
+                    const SizedBox(width: 2),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "Delete transaction",
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
