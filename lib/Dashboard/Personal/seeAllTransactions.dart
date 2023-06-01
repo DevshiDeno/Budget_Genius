@@ -110,7 +110,7 @@ class TransactionListMPESA extends StatelessWidget {
 class TransactionDetails extends StatelessWidget {
   TransactionDetails({Key? key, required this.transaction}) : super(key: key);
   final Transaction transaction;
-  final List<IconData> myIcons = [
+  final List myIcons = [
     Icons.home,
     Icons.card_giftcard,
     Icons.face,
@@ -153,7 +153,7 @@ class TransactionDetails extends StatelessWidget {
             Card(
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: 440,
+                height: 300,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -178,8 +178,10 @@ class TransactionDetails extends StatelessWidget {
                           itemCount: myIcons.length,
                           itemBuilder: (BuildContext context, int index) {
                             return SizedBox(
-                              width: 4,
-                              height: 4,
+                              width:
+                              MediaQuery.of(context).size.width / 3 - 20, // Adjusted the width of the Card
+                              height:
+                              MediaQuery.of(context).size.height / 6,
                               child: Icon(myIcons[index]),
                             );
                           },

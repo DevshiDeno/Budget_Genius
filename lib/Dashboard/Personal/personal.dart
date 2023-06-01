@@ -3,6 +3,8 @@ import 'package:budget_genius/Dashboard/Personal/seeAllTransactions.dart';
 import 'package:budget_genius/Dashboard/Personal/transactions.dart';
 import 'package:flutter/material.dart';
 
+import 'expenses.dart';
+
 class Personal extends StatelessWidget {
   const Personal({
     Key? key,
@@ -82,8 +84,8 @@ class Personal extends StatelessWidget {
                 Expanded(
                   child: TabBarView(children: [
                     buildTransactions(context),
-                    buildExpenses(),
-                    buildGoals(),
+                    Expenses(),
+                    Goal(goal: goal),
                   ]),
                 ),
               ],
@@ -225,11 +227,6 @@ class Personal extends StatelessWidget {
     );
   }
 
-  Widget buildExpenses() {
-    return Container();
-  }
 
-  Widget buildGoals() {
-    return Container();
-  }
+  
 }
