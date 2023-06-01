@@ -76,7 +76,7 @@ final List<Goals> goal = [
   Goals(amount: 500, title: 'Bike', target: 500),
   Goals(amount: 200, title: 'Phone', target: 1000),
   Goals(amount: 200, title: 'Laptop', target: 2000),
-  Goals(amount: 900, title: 'Airforce', target: 200),
-  Goals(amount: 2220, title: 'Cooker', target: 2080),
+  Goals(amount: 900, title: 'Airforce', target: 900),
+  Goals(amount: 2220, title: 'Cooker', target: 2220),
   Goals(amount: 200, title: 'Cooker', target: 600),
 ];

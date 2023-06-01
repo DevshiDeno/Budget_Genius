@@ -117,11 +117,16 @@ class _ExpensesState extends State<Expenses> {
   }
 }
 
-class Goal extends StatelessWidget {
+class Goal extends StatefulWidget {
   final List<Goals> goal;
 
   const Goal({Key? key, required this.goal}) : super(key: key);
 
+  @override
+  State<Goal> createState() => _GoalState();
+}
+
+class _GoalState extends State<Goal> {
   Widget completed(List<Goals> goals) {
     bool achieved = false;
     for (int i = 0; i < goals.length; i++) {
@@ -130,16 +135,14 @@ class Goal extends StatelessWidget {
         break;
       }
     }
-    if(achieved) {
-      return Icon(Icons.check_circle,
-          color: Colors.green);
-    }else{
+    if (achieved) {
+      return Icon(Icons.check_circle, color: Colors.green);
+    } else {
       return SizedBox.shrink(); // Return an empty widget instead of null
-
     }
-
   }
-  Widget text(List<Goals> goals){
+
+  Widget text(List<Goals> goals) {
     bool achieved = false;
     for (int i = 0; i < goals.length; i++) {
       if (goals[i].amount >= goals[i].target) {
@@ -147,16 +150,19 @@ class Goal extends StatelessWidget {
         break;
       }
     }
-    if(achieved) {
-      return Text("Achieved",
-      style: TextStyle(color: Colors.green),
+    if (achieved) {
+      return Text(
+        "Achieved",
+        style: TextStyle(color: Colors.green),
       );
-    }else{
-    return Text("Almost",
-      style: TextStyle(color: Colors.red),
-    );
+    } else {
+      return Text(
+        "Almost!!",
+        style: TextStyle(color: Colors.red),
+      );
     }
   }
+
   Widget remaining(List<Goals> goals) {
     var diff = 0;
     for (int i = 0; i < goals.length; i++) {
@@ -164,7 +170,8 @@ class Goal extends StatelessWidget {
       diff += difference.round();
     }
     if (diff != 0) {
-      return Text(diff.toString(),
+      return Text(
+        diff.toString(),
         style: TextStyle(color: Colors.red),
       );
     } else {
@@ -172,53 +179,158 @@ class Goal extends StatelessWidget {
     }
   }
 
+  void _showDialog() {
+    String goalName = "";
+    int goalTarget = 0;
+    int amount =0;
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Add your new goal"),
+            contentPadding: EdgeInsets.all(16.0),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  autofocus: true,
+                  decoration: InputDecoration(labelText: "Goal Name"),
+                  onChanged: (value) {
+                    setState(() {
+                      goalName = value;
+                    });
+                  },
+                  validator: (value)=>value!.isEmpty ? "Please eneter a goal name": null,
+                ),
+                TextFormField(
+                  autofocus: false,
+                  decoration: InputDecoration(labelText: "Deposit Starting Amount"),
+                  onChanged: (value) {
+                    setState(() {
+                      amount = int.parse(value) ?? 0;
+                    });
+                  },
+                  validator: (value)=>value!.isEmpty ? "Please eneter a goal name": null,
+                ),
+                TextFormField(
+                  autofocus: false,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(labelText: "Goal target"),
+                  onChanged: (value) {
+                    setState(() {
+                      goalTarget = int.parse(value) ?? 0;
+                    });
+                  },
+                  style: TextStyle(fontSize: 10),
+                  validator:
+                      (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a valid target amount';
+                    }
+                    int? target = int.tryParse(value);
+                    if (target == null || target == 0) {
+                      return 'Please enter a valid target amount';
+                    }
+                    return null;
+                  },
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("cancel")),
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      goal.add(Goals(
+                          title: goalName,
+                          amount: amount.toDouble(),
+                          target: goalTarget.toDouble()));
+                      Navigator.pop(context);
+                    });
+                  },
+                  child: Text("Save"))
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Card(
-        elevation: 10,
-        shadowColor: Colors.black,
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: 300, // Reduced the height of the Card
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+    return Card(
+      elevation: 0,
+      shadowColor: Colors.black,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 250, // Reduced the height of the Card
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 2,
-                      mainAxisSpacing: 4,
-                    ),
-                    itemCount: goal.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ClipRect(
-                        child: Card(
-                          elevation: 10,
-                          shadowColor: Colors.black,
-                          child: Container(
-                            width: 20,
-                            child: Column(
-                              children: [
-                                Text(goal[index].title),
-                                SizedBox(height: 4),
-                                Text(goal[index].amount.toString()),
-                                remaining([goal[index]]),
-                                SizedBox(height: 4),
-                                completed([goal[index]]), // Pass a list with a single Goal object here
-                                SizedBox(height: 4),
-                                text([goal[index]])
-                              ],
-                            ),
+                GridView.builder(
+                  shrinkWrap: true,
+                  // Added this line to make GridView take only as much height as required by its contents
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 2,
+                    mainAxisSpacing: 4,
+                  ),
+                  itemCount: widget.goal.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      elevation: 5,
+                      shadowColor: Colors.black,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Container(
+                          height: 80,
+                          width: 100,
+                          child: Column(
+                            children: [
+                              Text(widget.goal[index].title,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold)),
+                              SizedBox(height: 3),
+                              Text(widget.goal[index].amount.toString()),
+                              remaining([widget.goal[index]]),
+                              SizedBox(height: 3),
+                              completed([widget.goal[index]]),
+                              // Pass a list with a single Goal object here
+                              SizedBox(height: 3),
+                              text([widget.goal[index]])
+                            ],
                           ),
                         ),
-                      );
-                    },
+                      ),
+                    );
+                  },
+                ),
+                Card(
+                  child: Container(
+                    height: 80,
+                    width: 100,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            _showDialog();
+                            // goal.add(Goals(
+                            //     title: "New Goal", amount: 0, target: 400));
+                          },
+                          icon: Icon(Icons.add),
+                        ),
+                        Text("Add new Goal")
+                      ],
+                    ),
                   ),
                 )
               ],
