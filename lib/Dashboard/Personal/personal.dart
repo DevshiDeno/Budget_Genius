@@ -149,9 +149,7 @@ class _PersonalState extends State<Personal> {
                                   'M-pesa',
                                   //style:mediumTextStyle,
                                 ),
-                                subtitle: _mpesaBalance != null
-                                    ? Text(_mpesaBalance!)
-                                    : CircularProgressIndicator(),
+                                subtitle: Text("6000 Ksh."),
                               ),
                             ],
                           ),

@@ -65,11 +65,17 @@ final List<Transaction> transactions = [
 ];
 
 class Goals {
+  String id;
   final String title;
   final double amount;
   final double target;
 
-  Goals({required this.target, required this.title, required this.amount});
+  Goals(
+      {required this.target,
+      required this.title,
+      required this.amount,
+      String? id})
+      : id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
 }
 
 final List<Goals> goal = [

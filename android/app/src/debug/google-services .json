@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "546932262559",
+    "project_id": "events-4939f",
+    "storage_bucket": "events-4939f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546932262559:android:9a6f52528a76a67f95c4aa",
+        "android_client_info": {
+          "package_name": "com.example.budget_genius"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546932262559-42odls8eb38hmb72mckhl416fvtkieiq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.budget_genius",
+            "certificate_hash": "9de39041ca1f2cb6c1959c28bf8b27a3c5d819ab"
+          }
+        },
+        {
+          "client_id": "546932262559-33kdqhkd7765dksf91c23mrlckt025sb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA33NxH3ZvYws_DUuPLhJSobLAt8Uwn2do"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546932262559-33kdqhkd7765dksf91c23mrlckt025sb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "546932262559-a2vdi0finhk0g0fklgt40qtm378ojspi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.budgetGenius"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546932262559:android:c2b150b77c15a46395c4aa",
+        "android_client_info": {
+          "package_name": "it.softwarehouse.events_book"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546932262559-33kdqhkd7765dksf91c23mrlckt025sb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA33NxH3ZvYws_DUuPLhJSobLAt8Uwn2do"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546932262559-33kdqhkd7765dksf91c23mrlckt025sb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "546932262559-a2vdi0finhk0g0fklgt40qtm378ojspi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.budgetGenius"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
